@@ -130,3 +130,108 @@ document.querySelectorAll('.product button').forEach(button => {
 
 // Initialize cart count on page load
 updateCart();
+
+
+
+// Check if user is logged in on page load
+window.onload = function() {
+  checkLoginStatus();
+};
+
+// Check if the user is logged in
+function checkLoginStatus() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const loginLinks = document.querySelectorAll('.login-link');
+  const profileLinks = document.querySelectorAll('.profile-link');
+  
+  if (user) {
+    // If the user is logged in, show profile link and hide login/register links
+    loginLinks.forEach(link => link.style.display = 'none');
+    profileLinks.forEach(link => link.style.display = 'inline-block');
+  } else {
+    // If no user, show login/register links and hide profile link
+    loginLinks.forEach(link => link.style.display = 'inline-block');
+    profileLinks.forEach(link => link.style.display = 'none');
+  }
+}
+
+// Registration Logic
+document.getElementById('register-form')?.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if (localStorage.getItem('users')) {
+    const users = JSON.parse(localStorage.getItem('users'));
+    // Check if username already exists
+    if (users.find(user => user.username === username)) {
+      alert('Username already exists!');
+      return;
+    }
+  } else {
+    localStorage.setItem('users', JSON.stringify([]));
+  }
+
+  const newUser = { username, email, password };
+  const users = JSON.parse(localStorage.getItem('users'));
+  users.push(newUser);
+  localStorage.setItem('users', JSON.stringify(users));
+
+  alert('Registration successful!');
+  window.location.href = 'login.html'; // Redirect to login page
+});
+
+// Login Logic
+document.getElementById('login-form')?.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  const user = users.find(user => user.username === username && user.password === password);
+
+  if (user) {
+    localStorage.setItem('user', JSON.stringify(user)); // Save user data in localStorage
+    window.location.href = 'profile.html'; // Redirect to profile page
+  } else {
+    alert('Invalid username or password!');
+  }
+});
+
+// Profile Logic
+document.getElementById('profile-form')?.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  const updatedEmail = document.getElementById('profile-email').value;
+  const updatedPassword = document.getElementById('profile-password').value;
+
+  user.email = updatedEmail || user.email;
+  user.password = updatedPassword || user.password;
+
+  localStorage.setItem('user', JSON.stringify(user));
+  alert('Profile updated successfully!');
+});
+
+// Populate profile page with user data
+function loadProfile() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user) {
+    document.getElementById('profile-username').value = user.username;
+    document.getElementById('profile-email').value = user.email;
+  } else {
+    window.location.href = 'login.html'; // If no user, redirect to login page
+  }
+}
+
+loadProfile(); // Call on page load
+
+// Logout Logic
+document.getElementById('logout-button')?.addEventListener('click', function() {
+  localStorage.removeItem('user');
+  window.location.href = 'index.html'; // Redirect to home page
+});
