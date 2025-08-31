@@ -105,48 +105,6 @@ function checkLoginStatus() {
   profileLinks.forEach(link => link.style.display = user ? 'inline-block' : 'none');
 }
 
-document.getElementById('register-form')?.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const username = document.getElementById('username').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-
-  if (users.find(u => u.username === username)) {
-    alert('Username already exists!');
-    return;
-  }
-
-  const newUser = { username, email, password };
-  users.push(newUser);
-  localStorage.setItem('users', JSON.stringify(users));
-  alert('Registration successful!');
-  window.location.href = 'login.html';
-});
-
-document.getElementById('login-form')?.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const username = document.getElementById('login-username').value.trim();
-  const password = document.getElementById('login-password').value.trim();
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-
-  const found = users.find(u => u.username === username && u.password === password);
-  if (found) {
-    localStorage.setItem('user', JSON.stringify(found));
-    window.location.href = 'profile.html';
-  } else {
-    alert('Invalid login.');
-  }
-});
-
-document.getElementById('logout-button')?.addEventListener('click', () => {
-  localStorage.removeItem('user');
-  window.location.href = 'index.html';
-});
-
 function loadProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) {
@@ -157,27 +115,6 @@ function loadProfile() {
   document.getElementById('profile-username').value = user.username;
   document.getElementById('profile-email').value = user.email;
 }
-
-document.getElementById('profile-form')?.addEventListener('submit', e => {
-  e.preventDefault();
-  const user = JSON.parse(localStorage.getItem('user'));
-  const updatedEmail = document.getElementById('profile-email').value.trim();
-  const updatedPassword = document.getElementById('profile-password').value.trim();
-
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-
-  const currentUserIndex = users.findIndex(u => u.username === user.username);
-  if (currentUserIndex !== -1) {
-    users[currentUserIndex].email = updatedEmail || users[currentUserIndex].email;
-    if (updatedPassword) {
-      users[currentUserIndex].password = updatedPassword;
-    }
-
-    localStorage.setItem('users', JSON.stringify(users));
-    localStorage.setItem('user', JSON.stringify(users[currentUserIndex]));
-    alert('Profile updated!');
-  }
-});
 
 // ---------- INITIALIZATION ----------
 window.addEventListener('DOMContentLoaded', () => {
@@ -192,4 +129,83 @@ window.addEventListener('DOMContentLoaded', () => {
       addToCart(id);
     });
   });
+
+  // Attach register form listener if present
+  const registerForm = document.getElementById('register-form');
+  if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      if (users.find(u => u.username === username)) {
+        alert('Username already exists!');
+        return;
+      }
+
+      const newUser = { username, email, password };
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      alert('Registration successful!');
+      window.location.href = 'login.html';
+    });
+  }
+
+  // Attach login form listener if present
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const username = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      const found = users.find(u => u.username === username && u.password === password);
+      if (found) {
+        localStorage.setItem('user', JSON.stringify(found));
+        window.location.href = 'profile.html';
+      } else {
+        alert('Invalid login.');
+      }
+    });
+  }
+
+  // Attach logout button listener if present
+  const logoutButton = document.getElementById('logout-button');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', () => {
+      localStorage.removeItem('user');
+      window.location.href = 'index.html';
+    });
+  }
+
+  // Attach profile form listener if present
+  const profileForm = document.getElementById('profile-form');
+  if (profileForm) {
+    profileForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const user = JSON.parse(localStorage.getItem('user'));
+      const updatedEmail = document.getElementById('profile-email').value.trim();
+      const updatedPassword = document.getElementById('profile-password').value.trim();
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      const currentUserIndex = users.findIndex(u => u.username === user.username);
+      if (currentUserIndex !== -1) {
+        users[currentUserIndex].email = updatedEmail || users[currentUserIndex].email;
+        if (updatedPassword) {
+          users[currentUserIndex].password = updatedPassword;
+        }
+
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('user', JSON.stringify(users[currentUserIndex]));
+        alert('Profile updated!');
+      }
+    });
+  }
 });
