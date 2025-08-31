@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Simple Shop</h1>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    <a href="index.html">Back to Products</a>
+  </header>
+
+  <main>
+    <div id="product-details"></div>
+  </main>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const productId = getQueryParam('id');
+    const product = products.find(p => p.id === productId);
+
+    const detailsDiv = document.getElementById('product-details');
+
+    if (product) {
+      detailsDiv.innerHTML = `
+        <h2>${product.name}</h2>
+        <p>Price: $${product.price.toFixed(2)}</p>
+        <p>${product.description}</p>
+        <button id="add-to-cart">Add to Cart</button>
+      `;
+
+      document.getElementById('add-to-cart').addEventListener('click', () => {
+        addToCart(product.id);
+        updateCartCount();
+        alert('Added to cart!');
+      });
+    } else {
+      detailsDiv.innerHTML = '<p>Product not found.</p>';
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>
