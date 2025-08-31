@@ -1,95 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shopping Cart</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <header>
-    <h1>Simple Shop</h1>
-    <a href="index.html">Back to Products</a>
+    <h1>My Online Shop</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
   </header>
 
   <main>
-    <h2>Your Cart</h2>
-    <div id="cart-container"></div>
-    <p id="total-price"></p>
+    <div id="cart-container">
+      <!-- Example Cart Item -->
+      <div class="cart-item">
+        <h3>Red T-shirt</h3>
+        <p>Price: $19.99</p>
+        <p>Quantity: <span id="quantity-1">1</span></p>
+        <button class="inc" data-id="1">+</button>
+        <button class="dec" data-id="1">-</button>
+        <button class="remove" data-id="1">Remove</button>
+      </div>
+
+      <!-- Add more cart items here as needed -->
+      
+      <div id="total-price">Total: $19.99</div>
+    </div>
   </main>
 
-  <script src="products.js"></script>
   <script src="script.js"></script>
-  <script>
-    function renderCart() {
-      const cart = getCart();
-      const container = document.getElementById('cart-container');
-      container.innerHTML = '';
-
-      if (Object.keys(cart).length === 0) {
-        container.innerHTML = '<p>Your cart is empty.</p>';
-        document.getElementById('total-price').textContent = '';
-        return;
-      }
-
-      let total = 0;
-
-      Object.entries(cart).forEach(([productId, qty]) => {
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
-
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'cart-item';
-
-        const itemTotal = product.price * qty;
-        total += itemTotal;
-
-        itemDiv.innerHTML = `
-          <h3>${product.name}</h3>
-          <p>Price: $${product.price.toFixed(2)}</p>
-          <p>Quantity: 
-            <button class="dec" data-id="${productId}">-</button>
-            ${qty}
-            <button class="inc" data-id="${productId}">+</button>
-          </p>
-          <p>Item Total: $${itemTotal.toFixed(2)}</p>
-          <button class="remove" data-id="${productId}">Remove</button>
-          <hr>
-        `;
-
-        container.appendChild(itemDiv);
-      });
-
-      document.getElementById('total-price').textContent = `Total Price: $${total.toFixed(2)}`;
-
-      // Add event listeners for buttons
-      container.querySelectorAll('.inc').forEach(btn => {
-        btn.addEventListener('click', () => {
-          incrementQuantity(btn.dataset.id);
-          renderCart();
-          updateCartCount();
-        });
-      });
-
-      container.querySelectorAll('.dec').forEach(btn => {
-        btn.addEventListener('click', () => {
-          decrementQuantity(btn.dataset.id);
-          renderCart();
-          updateCartCount();
-        });
-      });
-
-      container.querySelectorAll('.remove').forEach(btn => {
-        btn.addEventListener('click', () => {
-          removeFromCart(btn.dataset.id);
-          renderCart();
-          updateCartCount();
-        });
-      });
-    }
-
-    renderCart();
-    updateCartCount();
-  </script>
 </body>
 </html>
