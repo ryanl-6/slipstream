@@ -1,0 +1,2 @@
+# slipstream
+Stocks made simple
