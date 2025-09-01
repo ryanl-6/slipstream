@@ -181,7 +181,7 @@ main {
 :root {
   --bg-color: #ffffff;
   --text-color: #121212;
-  --link-color: #007bff;
+  --link-color: #beebee;
   --button-bg: #f0f0f0;
   --button-text: #121212;
 }
@@ -222,6 +222,7 @@ button:hover {
   background-color: var(--primary-color);
   color: #696969;
 }
+
 
 
 
