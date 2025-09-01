@@ -177,23 +177,24 @@ main {
 
 
 
-/* Base -- light theme */
+/* Light theme */
 :root {
   --bg-color: #ffffff;
   --text-color: #121212;
-  --primary-color: #007bff;
+  --link-color: #007bff;
   --button-bg: #f0f0f0;
   --button-text: #121212;
 }
 
-/* Dark theme variant */
+/* Dark theme */
 [data-theme="dark"] {
   --bg-color: #121212;
-  --text-color: #ffffff;
-  --primary-color: #3399ff;
+  --text-color: #e0e0e0; /* Lighter text for better contrast */
+  --link-color: #3399ff;
   --button-bg: #333333;
   --button-text: #ffffff;
 }
+
 
 /* Apply variables site-wide */
 body {
@@ -221,3 +222,4 @@ button:hover {
   background-color: var(--primary-color);
   color: #ffffff;
 }
+
