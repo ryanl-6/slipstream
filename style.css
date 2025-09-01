@@ -189,7 +189,7 @@ main {
 /* Dark theme */
 [data-theme="dark"] {
   --bg-color: #121212;
-  --text-color: #e0e0e0; /* Lighter text for better contrast */
+  --text-color: #063970;
   --link-color: #3399ff;
   --button-bg: #333333;
   --button-text: #ffffff;
@@ -220,6 +220,7 @@ button {
 
 button:hover {
   background-color: var(--primary-color);
-  color: #ffffff;
+  color: #696969;
 }
+
 
