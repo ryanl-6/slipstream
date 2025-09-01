@@ -174,3 +174,50 @@ main {
     text-align: left;
   }
 }
+
+
+
+/* Base -- light theme */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #121212;
+  --primary-color: #007bff;
+  --button-bg: #f0f0f0;
+  --button-text: #121212;
+}
+
+/* Dark theme variant */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #3399ff;
+  --button-bg: #333333;
+  --button-text: #ffffff;
+}
+
+/* Apply variables site-wide */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
