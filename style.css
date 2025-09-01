@@ -14,7 +14,7 @@ body {
 }
 
 header {
-  background-color: #007bff;
+  background-color: var(--link-color);
   color: white;
   padding: 15px 20px;
   display: flex;
@@ -222,6 +222,7 @@ button:hover {
   background-color: var(--primary-color);
   color: #696969;
 }
+
 
 
 
