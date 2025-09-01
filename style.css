@@ -189,7 +189,7 @@ main {
 /* Dark theme */
 [data-theme="dark"] {
   --bg-color: #121212;
-  --text-color: #063970;
+  --text-color: #000000;
   --link-color: #3399ff;
   --button-bg: #333333;
   --button-text: #ffffff;
@@ -222,5 +222,6 @@ button:hover {
   background-color: var(--primary-color);
   color: #696969;
 }
+
 
 
