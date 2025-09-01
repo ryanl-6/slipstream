@@ -39,6 +39,33 @@
   </main>
 
   <script src="script.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const savedTheme = localStorage.getItem('theme');
+
+    // Apply stored theme, or system preference
+      if (savedTheme) {
+        root.setAttribute('data-theme', savedTheme);
+        toggleBtn.textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.setAttribute('data-theme', 'dark');
+        toggleBtn.textContent = '☀️ Light Mode';
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const currentTheme = root.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        toggleBtn.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+      });
+    });
+  </script>
+
 </body>
 </html>
+
 
