@@ -181,7 +181,7 @@ main {
 :root {
   --bg-color: #ffffff;
   --text-color: #121212;
-  --link-color: #beebee;
+  --link-color: #3399ff;
   --button-bg: #f0f0f0;
   --button-text: #121212;
 }
@@ -190,7 +190,7 @@ main {
 [data-theme="dark"] {
   --bg-color: #121212;
   --text-color: #000000;
-  --link-color: #3399ff;
+  --link-color: #0099cc;
   --button-bg: #333333;
   --button-text: #ffffff;
 }
@@ -222,6 +222,7 @@ button:hover {
   background-color: var(--primary-color);
   color: #696969;
 }
+
 
 
 
