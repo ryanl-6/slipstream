@@ -199,7 +199,7 @@ main {
   --button-bg: #f0f0f0;
   --button-text: #121212;
   --item-color: #d6d6d6;
-  --hover-color: #666666;
+  --hover-color: #cccccc;
 }
 
 /* Dark theme */
@@ -240,6 +240,7 @@ button:hover {
   background-color: var(--primary-color);
   color: #696969;
 }
+
 
 
 
