@@ -53,6 +53,20 @@ main {
   gap: 20px;
 }
 
+/* Style each product "column" */
+.product {
+  background-color: #f5f5f5;     /* 👈 Light grey background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.product:hover {
+  background-color: #eaeaea;     /* 👈 Slightly darker on hover */
+}
+
+
 .product {
   background-color: white;
   border-radius: 8px;
@@ -222,6 +236,7 @@ button:hover {
   background-color: var(--primary-color);
   color: #696969;
 }
+
 
 
 
