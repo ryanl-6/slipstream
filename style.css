@@ -198,7 +198,7 @@ main {
   --button-bg: #333333;
   --button-text: #ffffff;
   --item-color: #666666;
-  --hover-color: #d6d6d6;
+  --hover-color: #808080;
   --subtext-color: #dbdbdb;
 }
 
@@ -229,6 +229,7 @@ button:hover {
   background-color: var(--primary-color);
   color: #bababa;
 }
+
 
 
 
